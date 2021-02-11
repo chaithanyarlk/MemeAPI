@@ -30,10 +30,12 @@ def memeViews(request,id=None):
                     state = 0
                     print("Entere if")
                     if 'url' in request.query_params:
+                         print('Url')
                          memes.url = request.query_params['url']
                          memes.save()
                          state = 1
                     if 'caption' in request.query_params:
+                         print('Caption')
                          memes.caption = request.query_params['caption']
                          memes.save()
                          state = 1
