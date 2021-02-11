@@ -27,14 +27,17 @@ def memeViews(request,id=None):
                     print("Entered Except!")
                     return Response({'detail':"The id doesn't exist"},status=status.HTTP_400_BAD_REQUEST)
                if memes:
+                    state = 0
                     print("Entere if")
                     if 'url' in request.query_params:
                          memes.url = request.query_params['url']
                          memes.save()
-                         return Response(status=status.HTTP_202_ACCEPTED)
-                    elif 'caption' in request.query_params:
+                         state = 1
+                    if 'caption' in request.query_params:
                          memes.caption = request.query_params['caption']
                          memes.save()
+                         state = 1
+                    if state == 1:
                          return Response(status=status.HTTP_202_ACCEPTED)
                     else:
                          return Response(status=status.HTTP_204_NO_CONTENT)
